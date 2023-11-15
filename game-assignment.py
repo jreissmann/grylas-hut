@@ -21,7 +21,7 @@ if open_scenario == True:
     read_file = infile.read()
     print(read_file)
 else:
-    print('Scenario file does not exist')
+    print('The scenario.txt file does not exist.')
 
 # opens the setting-off.txt file if it exists
 open_setting_off = os.path.isfile(setting_off)
@@ -31,7 +31,7 @@ if open_setting_off == True:
     read_file = infile.read()
     print(read_file)
 else:
-    print('Setting Off file does not exist')
+    print('The setting-off.txt file does not exist.')
 
 # opens the encounter.txt file if it exists
 open_encounter = os.path.isfile(encounter)
@@ -41,7 +41,7 @@ if open_encounter == True:
     read_file = infile.read()
     print(read_file)
 else:
-    print('Encounter file does not exist')
+    print('The encounter.txt file does not exist.')
 
 # this is the first decision from the player to open or flee the hut, answered by user input
 while True:
@@ -103,7 +103,7 @@ while True:
             read_file = infile.read()
             print(read_file)
         else:
-            print ("The file does not exist.")
+            print ("The kitchen.txt file does not exist.")
 
         # players must make a decision in the kitchen to search, go back, or go downstairs
         while True:
@@ -127,7 +127,7 @@ while True:
                 read_file = infile.read()
                 print(read_file)
             else:
-                print("The file does not exist")
+                print("The basement.txt file does not exist.")
             # this shows that persuade and consider options have not been tried yet since they can only perform these actions once
             persuade = False
             consider = False
@@ -145,6 +145,7 @@ while True:
                     else:
                         total_hits_needed = 2
                     print("You need to hit Gryla", total_hits_needed, "times to defeat her.")
+                    print("Gryla needs 2 hit twice to defeat you.")
                     # this shows how many hits that gryla and player start off with. 
                     hit_gryla = 0
                     hit_player = 0
@@ -168,6 +169,8 @@ while True:
                                 chest_key = True
                                 gryla_defeated = True
                                 break
+                            else:
+                                pass
                         else:
                             print("YOU MISSED")
                             pass
@@ -187,7 +190,9 @@ while True:
                                     print(read_file)
                                     quit()
                                 else:
-                                    print("The file does not exist")
+                                    print("The failure-message.txt file does not exist.")
+                            else:
+                                pass
                         else:
                             print("GRYLA MISSED")
                             pass
@@ -237,7 +242,7 @@ while True:
             read_file = infile.read()
             print(read_file)
         else:
-            print ("The file does not exist.")
+            print ("The bedroom.txt file does not exist.")
 
         while True:
             search_goback_stairs = int(input("Would you like to search(1), go back to the previous room(2), or attempt to open the locked chest(3)?"))
@@ -254,7 +259,7 @@ while True:
                         read_file = infile.read()
                         print(read_file)
                     else:
-                        print("The potion file does not exist.")
+                        print("The potion.txt file does not exist.")
                     open_success_message = os.path.isfile(success_message)
                     if open_success_message == True:
                         infile = open(success_message, 'r')
@@ -262,6 +267,6 @@ while True:
                         print(read_file)
                         quit()
                     else:
-                        print("The success message file does not exist.")
+                        print("The success-message.txt file does not exist.")
                 else:
                     print("You attempt to open the locked chest, but do not have a key. Maybe it's around somewhere?")
