@@ -153,12 +153,12 @@ while True:
                     kill_player_hits = 2
                     # this is the dice rolling loop that continues until player or gryla is defeated
                     while True:
-                        random_dice = random.randint(1, dice_sides)
+                        player_attack_dice_roll = random.randint(1, dice_sides)
                         # if the player found the enchanted ring from the messy table, this is where it adds the +1 to all attacks
-                        player_current_roll = random_dice + enchanted_ring
-                        print("You roll a:", player_current_roll)
+                        player_final_attack_dice_roll = player_attack_dice_roll + enchanted_ring
+                        print("You roll a:", player_final_attack_dice_roll)
                         # player roll needs to be 12 or higher to hit gryla
-                        if player_current_roll >= 12:
+                        if player_final_attack_dice_roll >= 12:
                             hit_gryla += 1
                             print("YOU HIT GRYLA")
                             # if player's hits towards gryla are equal to total hits needed, gryla is defeated and the player is brought back to the lobby
@@ -176,9 +176,10 @@ while True:
                             pass
                         # after each player roll, gryla rolls as well unless she is defeated
                         # for attacking, the player reacts quickly, so gryla's rolls are always subtracted by 4
-                        gryla_current_roll = random_dice - 4
-                        print("Gryla rolls a:", gryla_current_roll)
-                        if gryla_current_roll >= 12:
+                        gryla_attack_dice_roll = random.randint(1, dice_sides)
+                        gryla_final_attack_dice_roll = gryla_attack_dice_roll - 4
+                        print("Gryla rolls a:", gryla_final_attack_dice_roll)
+                        if gryla_final_attack_dice_roll >= 12:
                             hit_player += 1
                             print("GRYLA HITS YOU")
                             # if gryla's hits toward player are equal to kill player hits, player is defeated, which displays the failure-message.txt if it exists
@@ -199,38 +200,46 @@ while True:
                     break
                 # if the player wants to try persuading
                 elif attack_persuade_consider == 2 and not persuade:
-                    random_dice = random.randint(1, dice_sides)
-                    player_dice_roll = random_dice
-                    print("You roll a:", player_dice_roll)
-                    gryla_dice_roll = random_dice + 4
-                    print("Gryla rolls a:", gryla_dice_roll)
-                    if player_dice_roll > gryla_dice_roll:
+                    player_persuade_dice_roll = random.randint(1, dice_sides)
+                    print("You roll a:", player_persuade_dice_roll)
+                    gryla_persuade_dice_roll = random.randint(1, dice_sides)
+                    gryla_final_persuade_dice_roll = gryla_persuade_dice_roll + 4
+                    print("Gryla rolls a:", gryla_persuade_dice_roll)
+                    persuade = True
+                    if player_persuade_dice_roll > gryla_persuade_dice_roll:
                         print("Gryla disappears and you obtain a key")
                         chest_key = True
                         gryla_defeated = True
                         break
 
                     else:
-                        print("You failed to persuade gryla. your only option is to consider or attack.")
-                    persuade = True
+                        if consider == True and persuade == True:
+                            print("Gryla is stubborn and you fail to persuade. Attacking is the only option left...")
+                        elif not consider and persuade == True:
+                            print("Gryla is stubborn and you fail to persuade. Your only options left are to either consider or attack Gryla.")
                 # if the player wants to try considering
                 elif attack_persuade_consider == 3 and not consider:
-                    random_dice = random.randint(1, dice_sides)
-                    player_dice_roll = random_dice
-                    print("You roll a:", player_dice_roll)
-                    gryla_dice_roll = random_dice - 2
-                    print("Gryla rolls a:", gryla_dice_roll)
-                    if player_dice_roll > gryla_dice_roll:
+                    player_consider_dice_roll = random.randint(1, dice_sides)
+                    print("You roll a:", player_consider_dice_roll)
+                    gryla_consider_random_dice = random.randint(1, dice_sides)
+                    # gryla's dice roll is subtracted by 2 because she is unwell
+                    gryla_final_consider_dice_roll = gryla_consider_random_dice - 2
+                    print("Gryla rolls a:", gryla_final_consider_dice_roll)
+                    consider = True
+                    if player_consider_dice_roll > gryla_final_consider_dice_roll:
                         print("You see gryla is just unwell, cure her, and obtain the key.")
                         print("Gryla thanks you, leads you back to the lobby and tells you to make yourself at home while she makes tea.")
                         chest_key = True
                         gryla_defeated = True
                         break
                     else:
-                        print("You failed to consider Gryla.")
-                    consider = True
+                        if persuade == True and consider == True:
+                            print("You failed to consider Gryla. Attacking is the only option left...")
+                        elif not persuade and consider == True:
+                            print("You failed to consider Gryla. Your only options left are to either persuade or attack Gryla.")
                 else:
-                    print("You can only attempt to persuade or consider Gryla once. Your only option left might be to attack.")
+                    print("Persuade and consider can only be used once...")
+                    pass
 
     elif kitchen_or_bedroom == 2:
         print ("You walk up to the door on the right and push it open.")
