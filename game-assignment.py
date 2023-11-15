@@ -279,3 +279,5 @@ while True:
                         print("The success-message.txt file does not exist.")
                 else:
                     print("You attempt to open the locked chest, but do not have a key. Maybe it's around somewhere?")
+
+                    # https://github.com/jreissmann/grylas-hut
